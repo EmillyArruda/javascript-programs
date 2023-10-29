@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Exercício D</title>
+</head>
+<body>
+    <img src="img/exerc.jpg" alt="Fábrica de Estrelas 2" class="normal">
+    <h1>Fábrica de Estrelas 2</h1>
+    <p>Número de estrelas: <input type="text" id="inNumero"></p>
+    <button id="btEstrelas">Criar Estrelas</button>
+    <pre id="outEstrelas"></pre>
+
+    <script>
+        function criarEstrelas(){
+            var inNumero = document.getElementById("inNumero")
+            var outEstrelas = document.getElementById("outEstrelas")
+
+            var numero = Number(inNumero.value)
+
+            if(isNaN(numero) || numero==0){
+                alert("Número Inválido")
+                inNumero.focus()
+                return
+            }
+            var estrelas = "" // acumulador de resposta
+            // percorre a quantidade de linhas inseridas pelo usuário
+            for(var i = 1; i<=numero; i++){ 
+                for(var j = 1; j <= i; j++){
+                    estrelas += "*" // acrescenta estrelas conforme vai percorrendo as linhas
+                }
+                estrelas += "\n" // quebra de linha 
+            }
+
+            outEstrelas.textContent = estrelas // muda o campo de resposta para o valor de estrelas
+        }
+        var btEstrelas = document.getElementById("btEstrelas")
+        btEstrelas.addEventListener("click", criarEstrelas)
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Exercício C</title>
+</head>
+<body>
+    <img src="img/exerc.jpg" alt="Programa Números Perfeitos" class="normal">
+    <h1>Programa Números Perfeitos</h1>
+    <p>Número:
+        <input type="text" id="inNumero">
+    </p>
+    <button id="btVerificar">Verificar se é perfeito</button>
+    <h3 id="outDivisores"></h3>
+    <h3 id="outResposta"></h3>
+
+    <script>
+        function numeroPerfeito(){
+            var inNumero = document.getElementById("inNumero")
+            var outDivisores = document.getElementById("outDivisores")
+            var outResposta = document.getElementById("outResposta")
+
+            var numero = Number(inNumero.value)
+
+            if(isNaN(numero)|| numero==0){
+                alert("Digite um número válido")
+                inNumero.focus()
+                return
+            }
+            var divisores = "Divisores do " + numero + ": 1" // é divisor universal
+            var soma = 1
+
+            //percorre possíveis divisores e acumula
+            for(var i = 2; i<=numero/2; i++){ // o último divisor de um número é sempre metade dele
+                if(numero%i == 0){
+                    divisores = divisores + ", " + i
+                    soma = soma + i
+                } 
+            }
+            divisores = divisores + " (Soma: " + soma+ ")"
+            outDivisores.textContent = divisores // muda o elemento de resposta
+
+            if(numero == soma){
+                outResposta.textContent = "É um número perfeito"
+            } else{
+                outResposta.textContent = "Não é um número perfeito"
+            }
+        }
+        var btVerificar = document.getElementById("btVerificar")
+        btVerificar.addEventListener("click", numeroPerfeito)
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Exercício A</title>
+</head>
+<body>
+    <img src="img/exerc.jpg" alt="Programa Repete Fruta" class="normal">
+    <h1>Programa Repete Fruta</h1>
+    <p>Fruta:
+        <input type="text" id="inFruta">
+    </p>
+    <p>Número: 
+        <input type="text" name="" id="inNumero">
+    </p>
+    <input type="button" value="Repetir Fruta" id="btRepetir">
+
+    <h3 id="outResposta"></h3>
+    <script>
+        function repetirFruta(){
+            var inFruta = document.getElementById("inFruta")
+            var inNumero = document.getElementById("inNumero")
+            var outResposta = document.getElementById("outResposta") // referencia aos elementos da página 
+    
+            var num = Number(inNumero.value)
+            var frutas = inFruta.value
+
+            if(frutas == "" || num == 0 || isNaN(num)){
+                alert("Informe um número válido")
+                inFruta.focus()
+                return
+            }
+
+            var resposta = "" // variável para concatenar a resposta
+
+            for(var i = 1; i < num; i++){
+                resposta = resposta + frutas + "*"
+            }
+            resposta = resposta + frutas // isola o último resultado
+    
+            outResposta.textContent = resposta
+        }
+        var btRepetir = document.getElementById("btRepetir")
+        btRepetir.addEventListener("click", repetirFruta)
+    </script>
+</body>
+</html>

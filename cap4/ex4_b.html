@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!--compatilidade para elemntos no internet explorer-->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Exercício B</title>
+</head>
+<body>
+    <img src="img/exerc.jpg" alt="Programa Criação de Chinchilas" class="normal">
+    <h1>Programa Criação de Chinchilas</h1>
+    <p>Nº de Chinchilas
+        <input type="text" id="inChinchilas">
+    </p>
+    <p>Nº de Anos
+        <input type="text" id="inAnos">
+    </p>
+    <input type="button" value="Mostrar Previsão de Chinchilas" id="btPrevisao">
+    <pre id="outResposta"></pre> <!-- Usado para quebra de linha na resposta -->
+
+    <script>
+        function criacaoChinchilas(){
+            // cria referência aos elementos da página
+            var inChinchilas = document.getElementById("inChinchilas")
+            var inAnos = document.getElementById("inAnos")
+            var outResposta = document.getElementById("outResposta")
+
+            var chinchilas = Number(inChinchilas.value)
+            var anos = Number(inAnos.value)
+
+            // checa se o valor de entrada foi válido
+            if(isNaN(chinchilas)|| chinchilas < 2 ||isNaN(anos) || anos == 0){
+                alert("Informe um número válido")
+                inChinchilas.focus()
+                return
+            }
+            var resposta = "" // concatena a resposta em uma string
+            var total = chinchilas // contador que recebe o valor de chinchilas 
+
+            for(var i = 1; i <= anos; i++){
+                resposta = resposta + i + " º Ano: " + total + " Chinchilas\n"
+                total = total * 3 // multiplica o número de chinchilas a cada volta do laço de repetição
+            }
+            outResposta.textContent = resposta
+        }       
+        var btPrevisao = document.getElementById("btPrevisao") // referencia ao botão da página
+        btPrevisao.addEventListener("click", criacaoChinchilas) // evento de click e chamada da função
+    </script>
+
+</body>
+</html>
