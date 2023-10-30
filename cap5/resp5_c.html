@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Resposta 5c</title>
+</head>
+<body>
+    <img src="img/exerc.jpg" alt="Programa Concurso" class="normal">
+    <h1>Programa Concurso</h1>
+    <p>Candidato:
+        <input type="text" id="inCandidato" autofocus>
+    </p>
+    <p>Nº de Acertos:
+        <input type="text" id="inAcertos">
+        <input type="button" value="Adicionar" id="btAdicionar">
+    </p>
+    <p>
+        <input type="button" value="Listar Todos" id="btListar"> 
+        <input type="button" value="Aprovados 2º fase" id="btAprovados">
+    </p>
+    <pre id="outResposta"></pre>
+
+    <script>
+        var nomes = []
+        function adicionarCandidatos(){
+            var inCandidato = document.getElementById("inCandidato")
+            var inAcertos = document.getElementById("inAcertos")
+
+            var candidato = inCandidato.value
+            var acertos = Number(inAcertos.value)
+
+            if(candidato == ""||acertos == 0||isNaN(acertos)){
+                alert("Informe os dados corretemnete...")
+                inCandidato.focus()
+                return
+            }
+
+            nomes.push({candidato: candidato, acertos: acertos})
+
+            inCandidato.value = ""
+            inAcertos.value = ""
+            inCandidato.focus()
+
+            listarTodos()
+        }
+        var btAdicionar = document.getElementById("btAdicionar")
+        btAdicionar.addEventListener("click", adicionarCandidatos)
+
+        function listarTodos(){
+            if(nomes.length == 0){
+                alert("Não existem candidatos na lista")
+                inCandidato.focus()
+                return
+            }
+
+            var lista = ""
+
+            for(var i = 0; i < nomes.length; i++){
+                lista += nomes[i].candidato + " - " + nomes[i].acertos + " acertos\n"
+            }
+
+            document.getElementById("outResposta").textContent = lista
+        }
+        var btListar = document.getElementById("btListar")
+        btListar.addEventListener("click", listarTodos)
+
+        function exibirAprovados(){
+            if(nomes.length == 0){
+                alert("Não existem candidatos na lista")
+                return
+            }
+
+            var notaCorte = Number(prompt("Número de acertos para aprovação? "))
+
+            if(notaCorte == 0 || isNaN(notaCorte)){
+                alert("Número inválido")
+                return
+            }
+
+            var copiaNomes = nomes.slice()
+
+            copiaNomes.sort(function(a, b){ return a.acertos - b.acertos })
+            copiaNomes.reverse()
+
+            var aprovados = ""
+
+            for(var i = 0; i < copiaNomes.length; i++){
+                if(copiaNomes[i].acertos >= notaCorte){
+                    aprovados += copiaNomes[i].candidato + " - " + copiaNomes[i].acertos + " acertos\n"
+                }
+            }
+
+            var outResposta = document.getElementById("outResposta")
+
+            if(aprovados == ""){
+                outResposta.textContent = "Não há candidatos aprovados"
+            }else{
+                outResposta.textContent = aprovados
+            }
+
+        }
+        var btAprovados = document.getElementById("btAprovados")
+        btAprovados.addEventListener("click", exibirAprovados)
+    </script>
+    
+</body>
+</html>

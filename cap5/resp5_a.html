@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Resposta 5.a</title>
+</head>
+<body>
+    <img src="img/exerc.jpg" alt="Jogos Eleminatórios" class="normal">
+    <h1>Jogos Eliminatórios</h1>
+    <p>Clube:
+        <input type="text" id="inClube" autofocus>
+        <input type="button" value="Adicionar" id="btAdicionar">
+    </p>
+    <p>
+        <input type="button" value="Listar Clubes" id="btListar">
+        <input type="button" value="Montar Tabela de Jogos" id="btMontar">
+    </p>
+    <pre id="outLista"></pre>
+
+    <script>
+        var clubes = []
+        function adicionarClubes(){
+            var inClube = document.getElementById("inClube")
+            var nomes = inClube.value
+
+            if(nomes == ""){
+                alert("Informe dados corretamente")
+                inClube.focus()
+                return
+            }
+            clubes.push(nomes)
+
+            listarClubes()
+
+            inClube.value = ""
+            inClube.focus()
+        }
+        var btAdicionar = document.getElementById("btAdicionar")
+        btAdicionar.addEventListener("click", adicionarClubes)
+
+        function listarClubes(){
+            if(clubes.length == 0){
+                alert("Não existem clubes na lista")
+                inClube.focus()
+                return
+            }
+
+            var lista = ""
+
+            for(var i = 0; i < clubes.length; i++){
+                lista+=(i+1) + ". " + clubes[i] + "\n"
+            }
+
+            document.getElementById("outLista").textContent = lista
+        }
+        var btListar = document.getElementById("btListar")
+        btListar.addEventListener("click", listarClubes)
+
+        function montarJogos(){
+            var tam = clubes.length
+
+            if(tam == 0 || (tam%2 == 1)){
+                alert("Deve haver um número par de times")
+                inClube.focus()
+                return
+            }
+
+            var jogos = ""
+            var ultimo = tam - 1
+
+            for(i=0; i<tam/2; i++){
+                jogos += clubes[i] + " X " + clubes[ultimo-i] + "\n"
+            }
+
+            document.getElementById("outLista").textContent = jogos
+        }
+        var btMontar = document.getElementById("btMontar")
+        btMontar.addEventListener("click", montarJogos)
+    </script>
+</body>
+</html>

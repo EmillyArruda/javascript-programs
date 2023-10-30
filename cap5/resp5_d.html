@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Resposta 5d</title>
+</head>
+<body>
+    <img src="img/exerc.jpg" alt="Programa Últimas Notícias" class="normal">
+    <h1>Programa Últimas Notícias</h1>
+    <p>Notícias:
+        <input type="text" name="" id="inNoticia">
+        <input type="button" value="Adicionar" id="btAdicionar">
+        <input type="button" value="Últimas Notícias" id="btNoticia">
+    </p>
+    <h3 id="outCadastro" class="italico">Notícias Cadastradas:</h3>
+    <pre id="outLista"></pre>
+
+    <script>
+        var noticias = []
+
+        function adicionarNoticias(){
+            var inNoticia = document.getElementById("inNoticia")
+            var outCadastro = document.getElementById("outCadastro")
+            var noticia = inNoticia.value 
+
+            if(noticia == ""){
+                alert("Informe os dados corretamente")
+                inNoticia.focus()
+                return
+            }
+
+            noticias.push(noticia)
+
+            outCadastro.textContent = "Notícias Cadastradas: " + noticias.length
+
+            inNoticia.value = ""
+            inNoticia.focus()
+        }
+        var btAdicionar = document.getElementById("btAdicionar")
+        btAdicionar.addEventListener("click", adicionarNoticias)
+
+        function listarUltimas(){
+            var num = Number(prompt("Quantas notícias quer listar?"))
+
+            var total = noticias.length
+
+            if(num == 0 || isNaN(num) || num > total){
+                alert("Número inválido tente novamente...")
+                return
+            }
+
+            var ultimas = num + " Últimas notícias\n--------------------------------------------------------\n"
+
+            for(var i = total - 1; i >= total - num; i--){
+                ultimas += (i+1)+"º) " + noticias[i] + "\n"
+            }
+
+            document.getElementById("outLista").textContent = ultimas
+        }
+        var btNoticia = document.getElementById("btNoticia")
+        btNoticia.addEventListener("click", listarUltimas)
+    </script>
+</body>
+</html>
